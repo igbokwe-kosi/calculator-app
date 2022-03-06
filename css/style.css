@@ -203,3 +203,8 @@ main {
   box-shadow: var(--box-shadow) var(--secondary-key-shadow);
   color: var(--text-color-white);
 }
+
+.pressed {
+  box-shadow: none;
+  transform: translateY(3px);
+}
