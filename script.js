@@ -144,3 +144,8 @@ btnOperator.forEach(btn =>
     calculator.updateDisplay();
   })
 );
+
+window.addEventListener('keypress', function (e) {
+  if (e.code.includes('Digit')) calculator.appendNumber(e.key);
+  calculator.updateDisplay();
+});
