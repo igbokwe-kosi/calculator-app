@@ -223,3 +223,9 @@ main {
   box-shadow: none;
   transform: translateY(3px);
 }
+
+@media (max-width: 18.75em) {
+  html {
+    font-size: 50%;
+  }
+}

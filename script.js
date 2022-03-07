@@ -40,7 +40,7 @@ toggleTheme.addEventListener('click', function (e) {
   [...this.children].forEach(child => child.classList.remove('active'));
   e.target.classList.add('active');
   toggle = e.target.dataset.toggle;
-  console.log(toggle);
+  // console.log(toggle);
   body.className = '';
   body.classList.add(`theme-${toggle}`);
 });
@@ -55,17 +55,20 @@ class Calculator {
     this.currentOperandTextElement = currentOperandTextElement;
     this.clear();
   }
-
-  delete() {
-    this.currentOperand = this.currentOperand.toString().slice(0, -1);
-  }
   appendNumber(number) {
     if (number === '.' && this.currentOperand.includes('.')) return;
     this.currentOperand = this.currentOperand.toString() + number.toString();
-    console.log(this.currentOperand);
+    // console.log(this.currentOperand);
+    // console.log(typeof this.currentOperand);
+  }
+
+  delete() {
+    // console.log(this.currentOperand);
+    this.currentOperand = this.currentOperand.toString().slice(0, -1);
   }
 
   chooseOperation(operation) {
+    // console.log(this.currentOperand);
     if (this.currentOperand === '') return;
     if (this.previousOperand !== '') {
       this.compute();
@@ -75,11 +78,11 @@ class Calculator {
     this.currentOperand = '';
   }
   compute() {
-    console.log(`computing`);
+    // console.log(`computing`);
     let computation;
     const prev = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
-    if (isNaN(prev) || isNaN(current)) console.log(prev, current);
+    if (isNaN(prev) || isNaN(current)) return;
     switch (this.operation) {
       case '+':
         computation = prev + current;
@@ -99,7 +102,7 @@ class Calculator {
     this.currentOperand = computation;
     this.operation = undefined;
     this.previousOperand = '';
-    console.log(computation);
+    // console.log(computation);
   }
   updateDisplay() {
     this.currentOperandTextElement.textContent = this.currentOperand;
@@ -116,7 +119,10 @@ const calculator = new Calculator(
   currentOperandTextElement
 );
 
-btnDelete.addEventListener('click', calculator.delete);
+btnDelete.addEventListener('click', () => {
+  calculator.delete();
+  calculator.updateDisplay();
+});
 btnEqual.addEventListener('click', () => {
   // console.log('clicked');
   calculator.compute();
